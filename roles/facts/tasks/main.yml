@@ -12,6 +12,10 @@
     verbosity: 4
   register: result
 
+- name: Print some information
+  debug:
+    msg: "Running on {{ ansible_virtualization_role }}, virtualization type: {{ ansible_virtualization_type }}."
+
 - name: Stop playbook after debug
   meta: end_host
   when: result.skipped is not defined
