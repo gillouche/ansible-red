@@ -6,4 +6,36 @@
     state: latest
     name: ['firefox', "tor-browser"]
 
+- name: Ensure download dir exists
+  ansible.builtin.file:
+    dest: "{{ firefox_extensions_dl_repo }}"
+    state: directory
+    mode: '0755'
+
+- name: Download firefox extensions
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ firefox_extensions_dl_repo }}/{{ item.url | basename }}"
+    mode: '0644'
+  with_items: "{{ firefox_extension }}"
+
+- name: Ensure Mozilla Firefox distribution extensions directory exists
+  file:
+    path: "{{ firefox_extension_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Install extensions
+  copy:
+    src: "{{ firefox_extensions_dl_repo }}/{{ item.url | basename }}"
+    dest: "{{ firefox_extension_path }}/{{ item.id }}.xpi"
+    mode: '0644'
+    remote_src: yes
+  with_items: "{{ firefox_extension }}"
+
+- name: Install template userjs
+  template:
+    src: firefox-mozilla.cfg.j2
+    dest: /etc/firefox/firefox.js
+    mode: 0644
 ...
