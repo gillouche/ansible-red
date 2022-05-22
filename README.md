@@ -15,6 +15,8 @@ Some config files are encrypted
 
 * roles/vpn/files/*
 
+Remove them and remove "--ask-vault-pass" from run.sh script.
+
 ## Install
 
 ```bash
