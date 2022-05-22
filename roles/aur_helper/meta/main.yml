@@ -1,0 +1,3 @@
+dependencies:
+  - role: env_setup
+    when: env_setup_was_executed is not defined

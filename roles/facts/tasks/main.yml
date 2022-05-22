@@ -1,0 +1,26 @@
+---
+# tasks file for facts
+
+- name: Check that the target_user variable has been provided to the playbook
+  fail:
+    msg: "The variable 'target_user' must be provided in order to run the playbook."
+  when: target_user is not defined
+  
+- name: Print all available facts
+  ansible.builtin.debug:
+    var: ansible_facts
+    verbosity: 4
+  register: result
+
+- name: Print some information
+  debug:
+    msg: "Running on {{ ansible_virtualization_role }}, virtualization type: {{ ansible_virtualization_type }}."
+
+- name: Stop playbook after debug
+  meta: end_host
+  when: result.skipped is not defined
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true

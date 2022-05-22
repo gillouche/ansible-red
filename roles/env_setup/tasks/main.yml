@@ -1,0 +1,44 @@
+---
+# tasks file for env-setup
+
+- name: Create group for user
+  group:
+    name: "{{ target_user }}"
+    state: present
+
+- name: Update main group user
+  user:
+    name: "{{ target_user }}"
+    group: "{{ target_user }}"
+    append: yes
+
+- name: Update groups of user
+  user:
+    name: "{{ target_user }}"
+    groups: "wheel"
+    append: yes
+
+- name: Change home group directory to new group
+  file:
+    path: "/home/{{ target_user }}"
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+
+- name: Update repo and upgrade (Arch)
+  pacman: 
+    update_cache: yes
+    upgrade: yes
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install common packages
+  pacman:
+    state: latest
+    name: ['curl', 'wget', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
+  when: ansible_distribution == 'Archlinux'
+
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true
+...
