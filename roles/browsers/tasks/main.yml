@@ -39,9 +39,15 @@
     state: directory
     mode: '0755'
 
-- name: Install template userjs
+- name: Install firefox config
   template:
     src: firefox-mozilla.cfg.j2
     dest: /etc/firefox/firefox.js
+    mode: 0644
+
+- name: Install foxyproxy config
+  template:
+    src: foxyproxy.json.j2
+    dest: /etc/firefox/foxyproxy.json
     mode: 0644
 ...
