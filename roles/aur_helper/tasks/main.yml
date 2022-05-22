@@ -58,7 +58,7 @@
 
 - name: Register package name
   shell:
-    cmd: ls yay*.tar.xz
+    cmd: ls yay*.tar.zst
     chdir:  "{{ yay_work_dir_path }}"
   register: yay_package_name
   when: not yay_installed and ansible_distribution == 'Archlinux'
