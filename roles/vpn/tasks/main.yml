@@ -1,0 +1,20 @@
+---
+# tasks file for vpn
+
+- name: Install openvpn
+  yay: 
+    name: ["openvpn"]
+    state: latest
+  when: ansible_distribution == 'Archlinux'
+
+- name: Copy ovpn configs
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/openvpn/client/{{ item }}"
+    owner: root
+    group: root
+    mode: 0600
+  with_items:
+    - htb-gillouche-eu-free-3.ovpn
+    - thm-gillouche-eu-vip-1.ovpn
+

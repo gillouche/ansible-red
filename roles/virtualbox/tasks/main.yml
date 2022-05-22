@@ -1,0 +1,21 @@
+---
+# tasks file for virtualbox
+
+- name: Install virtualbox (host)
+  yay: 
+    name: ["virtualbox", "virtualbox-host-modules-arch"]
+    state: latest
+  when: ansible_virtualization_role == 'host' and ansible_distribution == 'Archlinux'
+
+- name: Install virtualbox (guest)
+  yay: 
+    name: ["virtualbox-guest-utils"]
+    state: latest
+  when: ansible_virtualization_role == 'guest' and ansible_distribution == 'Archlinux'
+
+- name: Enable systemd vbox guest service
+  systemd:
+    name: vboxservice
+    enable: yes
+    state: restarted
+  when: ansible_virtualization_role == 'guest' and ansible_distribution == 'Archlinux'
