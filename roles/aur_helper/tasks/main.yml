@@ -1,0 +1,82 @@
+---
+# tasks file for aur-helper
+
+- name: Set variables
+  set_fact:
+    yay_work_dir_path: /tmp/yay/yay
+  when: ansible_distribution == 'Archlinux'
+
+- name: Check if yay is installed
+  shell:
+    cmd: yay
+  register: result
+  ignore_errors: true
+  when: ansible_distribution == 'Archlinux'
+
+- name: Set fact that yay is not installed 
+  set_fact:
+    yay_installed: false
+  when: "'command not found' in result.stderr and ansible_distribution == 'Archlinux'"
+
+- name: Set fact that yay is installed 
+  set_fact:
+    yay_installed: true
+  when: "'command not found' not in result.stderr and ansible_distribution == 'Archlinux'"
+
+- name: Remove work dir if existing
+  file:
+    path: "{{ yay_work_dir_path }}"
+    state: absent
+  when: not yay_installed and ansible_distribution == 'Archlinux'
+
+- name: Create working directory
+  file:
+    path: "{{ yay_work_dir_path }}"
+    state: directory
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: 0755
+    recurse: yes
+  when: not yay_installed and ansible_distribution == 'Archlinux'
+
+- name: Download PKGBUILD of yay
+  get_url:
+    url: https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=yay
+    dest: "{{ yay_work_dir_path }}/PKGBUILD"
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: 0644
+  when: not yay_installed and ansible_distribution == 'Archlinux'
+
+- name: Build yay
+  shell: 
+    cmd: yes | makepkg -sr
+    chdir:  "{{ yay_work_dir_path }}"
+  become_method: runas
+  become_user: "{{ target_user }}"
+  when: not yay_installed and ansible_distribution == 'Archlinux'
+
+- name: Register package name
+  shell:
+    cmd: ls yay*.tar.xz
+    chdir:  "{{ yay_work_dir_path }}"
+  register: yay_package_name
+  when: not yay_installed and ansible_distribution == 'Archlinux'
+
+- name: Install yay with pacman
+  pacman:
+    name: "{{ yay_work_dir_path }}/{{ yay_package_name.stdout_lines[0] }}"
+    state: present
+  when: not yay_installed and ansible_distribution == 'Archlinux'
+
+- name: Update cache/upgrade
+  yay:
+    update_cache: yes 
+    upgrade: yes
+  when: ansible_distribution == 'Archlinux'
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true
+
