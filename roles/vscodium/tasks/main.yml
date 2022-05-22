@@ -1,0 +1,8 @@
+---
+# tasks file for vscodium
+
+- name: Install vscodium
+  yay: 
+    name: vscodium
+    state: latest
+

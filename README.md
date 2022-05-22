@@ -10,6 +10,11 @@ This playbook only supports BlackArch Linux for the moment.
 * python3
 * OS stuff: Xorg, DE, GPU drivers, ...
 
+## Vault
+Some config files are encrypted
+
+* roles/vpn/files/*
+
 ## Install
 
 ```bash

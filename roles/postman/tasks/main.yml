@@ -1,0 +1,8 @@
+---
+# tasks file for postman
+
+- name: Install postman-bin
+  yay: 
+    name: postman-bin
+    state: latest
+...

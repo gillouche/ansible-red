@@ -1,0 +1,8 @@
+---
+# tasks file for jetbrains
+
+- name: Install jetbrains-toolbox
+  yay: 
+    name: jetbrains-toolbox
+    state: latest
+    

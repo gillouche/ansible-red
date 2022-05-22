@@ -1,0 +1,9 @@
+---
+# tasks file for browsers
+
+- name: Install browser packages
+  yay:
+    state: latest
+    name: ['firefox', "tor-browser"]
+
+...
