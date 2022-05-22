@@ -7,7 +7,7 @@
     name: ['firefox', "tor-browser"]
 
 - name: Ensure download dir exists
-  ansible.builtin.file:
+  file:
     dest: "{{ firefox_extensions_dl_repo }}"
     state: directory
     mode: '0755'
@@ -32,6 +32,12 @@
     mode: '0644'
     remote_src: yes
   with_items: "{{ firefox_extension }}"
+
+- name: Ensure firefox config dir exists
+  file:
+    dest: "/etc/firefox"
+    state: directory
+    mode: '0755'
 
 - name: Install template userjs
   template:
