@@ -9,6 +9,6 @@
 - name: Install firefox config
   template:
     src: firefox-mozilla.cfg.j2
-    dest: /usr/lib/firefox/mozilla.cfg
+    dest: /usr/lib/firefox/defaults/pref/firefox.js
     mode: 0644
 ...
