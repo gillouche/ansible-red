@@ -16,6 +16,6 @@
 - name: Enable systemd vbox guest service
   systemd:
     name: vboxservice
-    enable: yes
+    enabled: yes
     state: restarted
   when: ansible_virtualization_role == 'guest' and ansible_distribution == 'Archlinux'
