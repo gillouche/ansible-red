@@ -1,0 +1,14 @@
+---
+# tasks file for browsers
+
+- name: Install browser packages
+  yay:
+    state: latest
+    name: ['firefox', "tor-browser"]
+
+- name: Install firefox config
+  template:
+    src: firefox-mozilla.cfg.j2
+    dest: /usr/lib/firefox/defaults/pref/firefox.js
+    mode: 0644
+...

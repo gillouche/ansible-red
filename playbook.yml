@@ -8,4 +8,13 @@
     - facts
     - env_setup
     - aur_helper
+    - virtualbox
+    - vpn
+    - docker
+    - python
+    - browsers
+    - jetbrains
+    - postman
+    - vscodium
+    - tools_webapp
 ...

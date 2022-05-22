@@ -1,0 +1,13 @@
+---
+# tasks file for tools_webapp
+
+- name: Install tools
+  yay:
+    name: "{{ item }}"
+    state: latest 
+  when: ansible_distribution == 'Archlinux'
+  with_items:
+    - blackarch/burpsuite
+    - blackarch/zaproxy
+    - blackarch/gobuster
+    

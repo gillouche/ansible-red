@@ -10,6 +10,13 @@ This playbook only supports BlackArch Linux for the moment.
 * python3
 * OS stuff: Xorg, DE, GPU drivers, ...
 
+## Vault
+Some config files are encrypted
+
+* roles/vpn/files/*
+
+Remove them and remove "--ask-vault-pass" from run.sh script.
+
 ## Install
 
 ```bash

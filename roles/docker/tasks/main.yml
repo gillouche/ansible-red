@@ -1,0 +1,21 @@
+---
+# tasks file for docker
+
+- name: Install docker
+  yay:
+    state: latest
+    name: ['docker', 'docker-compose']
+  notify: "Restart docker"
+
+- name: Add target_user to docker group
+  user: 
+    name: "{{ target_user }}"
+    groups: docker
+    append: yes
+
+- name: Start service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+...

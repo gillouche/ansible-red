@@ -1,0 +1,7 @@
+---
+# tasks file for python
+- name: Install python3 and other tools
+  yay:
+    name: ["python3", "python-pip"]
+    state: latest
+  when: ansible_distribution == 'Archlinux'
