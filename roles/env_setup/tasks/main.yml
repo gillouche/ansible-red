@@ -30,12 +30,23 @@
     upgrade: yes
   when: ansible_distribution == 'Archlinux'
 
-- name: Install common packages
+- name: Update repo and upgrade (Debian)
+  apt: 
+    update_cache: yes
+    upgrade: yes
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
+- name: Install common packages (Arch)
   pacman:
     state: latest
     name: ['curl', 'wget', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
   when: ansible_distribution == 'Archlinux'
 
+- name: Install common packages (Debian)
+  apt:
+    state: latest
+    name: ['curl', 'wget', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
 - name: "Define role executed var {{ role_name }}_was_executed"
   set_fact:

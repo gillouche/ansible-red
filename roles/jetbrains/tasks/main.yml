@@ -1,8 +1,15 @@
 ---
 # tasks file for jetbrains
 
-- name: Install jetbrains-toolbox
+- name: Install jetbrains-toolbox (Arch)
   yay: 
     name: jetbrains-toolbox
     state: latest
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install jetbrains-toolbox (Debian)
+  apt:
+    name: jetbrains-toolbox
+    state: latest
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
     

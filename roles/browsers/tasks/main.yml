@@ -1,10 +1,17 @@
 ---
 # tasks file for browsers
 
-- name: Install browser packages
+- name: Install browser packages (Arch)
   yay:
     state: latest
     name: ['firefox', "tor-browser"]
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install browser packages (Arch)
+  apt:
+    state: latest
+    name: ['firefox', "tor-browser"]
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
 - name: Install firefox config
   template:

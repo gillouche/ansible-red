@@ -1,11 +1,17 @@
 ---
 # tasks file for vpn
 
-- name: Install openvpn
+- name: Install openvpn (Arch)
   yay: 
     name: ["openvpn"]
     state: latest
   when: ansible_distribution == 'Archlinux'
+
+- name: Install openvpn (Debian)
+  apt: 
+    name: ["openvpn"]
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Copy ovpn configs
   copy:

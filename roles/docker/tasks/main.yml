@@ -1,11 +1,19 @@
 ---
 # tasks file for docker
 
-- name: Install docker
+- name: Install docker (Arch)
   yay:
     state: latest
     name: ['docker', 'docker-compose']
   notify: "Restart docker"
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install docker (Debian)
+  apt:
+    state: latest
+    name: ['docker', 'docker-compose']
+  notify: "Restart docker"
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
 - name: Add target_user to docker group
   user: 

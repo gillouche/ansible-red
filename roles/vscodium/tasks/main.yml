@@ -1,8 +1,14 @@
 ---
 # tasks file for vscodium
 
-- name: Install vscodium
+- name: Install vscodium (Arch)
   yay: 
     name: vscodium
     state: latest
+  when: ansible_distribution == 'Archlinux'
 
+- name: Install vscodium (Debian)
+  apt: 
+    name: vscodium
+    state: latest
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

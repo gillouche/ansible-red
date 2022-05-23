@@ -1,8 +1,15 @@
 ---
 # tasks file for postman
 
-- name: Install postman-bin
+- name: Install postman-bin (Arch)
   yay: 
     name: postman-bin
     state: latest
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install postman-bin (Debian)
+  apt: 
+    name: postman
+    state: latest
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 ...
