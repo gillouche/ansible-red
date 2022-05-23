@@ -13,7 +13,7 @@
     state: latest
     name: ['docker', 'docker-compose']
   notify: "Restart docker"
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Add target_user to docker group
   user: 

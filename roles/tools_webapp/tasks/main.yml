@@ -19,6 +19,5 @@
     - burpsuite
     - zaproxy
     - gobuster
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+  when: ansible_facts['os_family'] == "Debian"
 
-  
