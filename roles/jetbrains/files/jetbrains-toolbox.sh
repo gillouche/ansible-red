@@ -21,7 +21,7 @@ DEST=/tmp/$FILE
 echo ""
 echo -e "Downloading Toolbox files"
 echo ""
-wget -cO  ${DEST} ${URL} --read-timeout=5 --tries=0
+wget -cO  ${è} ${URL} --read-timeout=5 --tries=0
 echo ""
 echo -e "Download complete!"
 
@@ -35,6 +35,7 @@ rm /usr/local/bin/jetbrains-toolbox
 echo ""
 echo  -e "Installing to $DIR"
 echo ""
+mkdir -p "$DIR"
 tar -xzf ${DEST} -C ${DIR} --strip-components=1
 
 chmod -R u+rwX,go+rX,go-w ${DIR}
