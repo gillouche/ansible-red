@@ -28,6 +28,7 @@
     src: https://dl.pstmn.io/download/latest/linux64
     dest: /tmp/
     mode: 0755
+    remote_src: true
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Copy postman binary (Debian)

@@ -3,13 +3,13 @@
 
 - name: Install openvpn (Arch)
   yay: 
-    name: ["openvpn"]
+    name: ["openvpn", "networkmanager-openvpn"]
     state: latest
   when: ansible_distribution == 'Archlinux'
 
 - name: Install openvpn (Debian)
   apt: 
-    name: ["openvpn"]
+    name: ["openvpn", "network-manager-openvpn"]
     state: latest
   become: true
   when: ansible_facts['os_family'] == "Debian"
