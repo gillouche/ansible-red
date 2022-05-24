@@ -7,10 +7,33 @@
     state: latest
   when: ansible_distribution == 'Archlinux'
 
-- name: Install postman-bin (Debian)
-  apt: 
-    name: postman
-    state: latest
+- name: Create postman directory (Debian)
+  file:
+    path: /opt/postman
+    owner: root
+    group: root
+    mode: 0755
   become: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Download and unarchive postman (Debian)
+  unarchive:
+    url: https://dl.pstmn.io/download/latest/linux64
+    dest: /tmp/
+    mode: 0755
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Copy postman binary (Debian)
+  copy:
+    src: /tmp/Postman
+    dest: /opt/postman/postman
+  become: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Create symlink (Debian)
+  file:
+    src: /opt/postman/postman
+    dest: /usr/local/bin/postman
+    state: link
   when: ansible_facts['os_family'] == "Debian"
 ...
