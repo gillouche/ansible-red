@@ -27,7 +27,7 @@
   file:
     path: "{{ yay_work_dir_path }}"
     state: absent
-  when: not yay_installed and ansible_distribution == 'Archlinux'
+  when: ansible_distribution == 'Archlinux' and not yay_installed 
 
 - name: Create working directory
   file:
@@ -37,7 +37,7 @@
     group: "{{ target_user }}"
     mode: 0755
     recurse: yes
-  when: not yay_installed and ansible_distribution == 'Archlinux'
+  when: ansible_distribution == 'Archlinux' and not yay_installed
 
 - name: Download PKGBUILD of yay
   get_url:
@@ -46,7 +46,7 @@
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
     mode: 0644
-  when: not yay_installed and ansible_distribution == 'Archlinux'
+  when: ansible_distribution == 'Archlinux' and not yay_installed
 
 - name: Build yay
   shell: 
@@ -54,20 +54,20 @@
     chdir:  "{{ yay_work_dir_path }}"
   become_method: runas
   become_user: "{{ target_user }}"
-  when: not yay_installed and ansible_distribution == 'Archlinux'
+  when: ansible_distribution == 'Archlinux' and not yay_installed
 
 - name: Register package name
   shell:
     cmd: ls yay*.tar.zst
     chdir:  "{{ yay_work_dir_path }}"
   register: yay_package_name
-  when: not yay_installed and ansible_distribution == 'Archlinux'
+  when: ansible_distribution == 'Archlinux' and not yay_installed
 
 - name: Install yay with pacman
   pacman:
     name: "{{ yay_work_dir_path }}/{{ yay_package_name.stdout_lines[0] }}"
     state: present
-  when: not yay_installed and ansible_distribution == 'Archlinux'
+  when: ansible_distribution == 'Archlinux' and not yay_installed
 
 - name: Update cache/upgrade
   yay:
