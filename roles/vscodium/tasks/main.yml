@@ -23,7 +23,7 @@
 
 - name: Install vscodium (Debian)
   apt: 
-    update: yes
+    update_cache: yes
     name: codium
     state: latest
   become: true
