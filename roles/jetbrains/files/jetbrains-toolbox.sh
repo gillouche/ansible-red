@@ -24,17 +24,20 @@ echo ""
 wget -cO  ${DEST} ${URL} --read-timeout=5 --tries=0
 echo ""
 echo -e "Download complete!"
-echo ""
+
 DIR="/opt/jetbrains-toolbox"
+echo ""
+echo  -e "Cleaning to $DIR"
+echo ""
+rm -r "$DIR"
+rm /usr/local/bin/jetbrains-toolbox
+
 echo ""
 echo  -e "Installing to $DIR"
 echo ""
+tar -xzf ${DEST} -C ${DIR} --strip-components=1
 
-if mkdir ${DIR}; then
-    tar -xzf ${DEST} -C ${DIR} --strip-components=1
-fi
-
-chmod -R +rwx ${DIR}
+chmod -R u+rwX,go+rX,go-w ${DIR}
 
 ln -s ${DIR}/jetbrains-toolbox /usr/local/bin/jetbrains-toolbox
 chmod +x /usr/local/bin/jetbrains-toolbox
