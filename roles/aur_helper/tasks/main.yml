@@ -16,12 +16,12 @@
 - name: Set fact that yay is not installed 
   set_fact:
     yay_installed: false
-  when: "'command not found' in result.stderr and ansible_distribution == 'Archlinux'"
+  when: ansible_distribution == 'Archlinux' and "'command not found' in result.stderr"
 
 - name: Set fact that yay is installed 
   set_fact:
     yay_installed: true
-  when: "'command not found' not in result.stderr and ansible_distribution == 'Archlinux'"
+  when: ansible_distribution == 'Archlinux' and "'command not found' not in result.stderr"
 
 - name: Remove work dir if existing
   file:
