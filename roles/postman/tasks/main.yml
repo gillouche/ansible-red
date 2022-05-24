@@ -7,6 +7,11 @@
     state: latest
   when: ansible_distribution == 'Archlinux'
 
+- name: Delete postman directory (Debian)
+  file:
+    path: /opt/postman
+    state: absent
+
 - name: Create postman directory (Debian)
   file:
     path: /opt/postman
@@ -21,14 +26,14 @@
   unarchive:
     src: https://dl.pstmn.io/download/latest/linux64
     dest: /tmp/
-    remote_src: yes
     mode: 0755
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Copy postman binary (Debian)
   copy:
-    src: /tmp/Postman
+    src: /tmp/Postman/Postman
     dest: /opt/postman/postman
+    remote_src: true
   become: true
   when: ansible_facts['os_family'] == "Debian"
 
