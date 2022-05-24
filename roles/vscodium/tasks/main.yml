@@ -7,16 +7,18 @@
     state: latest
   when: ansible_distribution == 'Archlinux'
 
-- name: Add apt repository for codium (Debian)
+- name: Add apt key for codium (Debian)
   apt_key:
     url: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     state: present 
+  become: true
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Add repository (Debian)
   apt_repository:
     repo: 'deb https://download.vscodium.com/debs vscodium main'
     state: present
+  become: true
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Install vscodium (Debian)
