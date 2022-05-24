@@ -10,7 +10,7 @@
 - name: Install browser packages (Debian)
   apt:
     state: latest
-    name: ['firefox-esr', "tor-browser"]
+    name: ['firefox-esr', "tor",  "torbrowser-launcher"]
   become: true
   when: ansible_facts['os_family'] == "Debian"
 
