@@ -2,5 +2,5 @@
 
 verbosity=$1
 
-ansible-playbook -e target_user=$USER -i hosts --ask-vault-pass --ask-become-pass playbook.yml ${verbosity}
+ansible-playbook -e target_user=$USER -i hosts.yml --ask-vault-pass --ask-become-pass site.yml ${verbosity}
 

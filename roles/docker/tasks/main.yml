@@ -1,21 +1,32 @@
 ---
 # tasks file for docker
 
-- name: Install docker
+- name: Install docker (Arch)
   yay:
     state: latest
     name: ['docker', 'docker-compose']
   notify: "Restart docker"
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install docker (Debian)
+  apt:
+    state: latest
+    name: ['docker', 'docker-compose']
+  notify: "Restart docker"
+  become: true
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Add target_user to docker group
   user: 
     name: "{{ target_user }}"
     groups: docker
     append: yes
+  become: true
 
 - name: Start service
   systemd:
     name: docker
     state: started
     enabled: yes
+  become: true
 ...

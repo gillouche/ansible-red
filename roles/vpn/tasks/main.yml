@@ -1,11 +1,18 @@
 ---
 # tasks file for vpn
 
-- name: Install openvpn
+- name: Install openvpn (Arch)
   yay: 
-    name: ["openvpn"]
+    name: ["openvpn", "networkmanager-openvpn"]
     state: latest
   when: ansible_distribution == 'Archlinux'
+
+- name: Install openvpn (Debian)
+  apt: 
+    name: ["openvpn", "network-manager-openvpn"]
+    state: latest
+  become: true
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Copy ovpn configs
   copy:
@@ -13,8 +20,18 @@
     dest: "/etc/openvpn/client/{{ item }}"
     owner: root
     group: root
-    mode: 0600
+    mode: 0644
+  become: true
   with_items:
     - htb-gillouche-eu-free-3.ovpn
     - thm-gillouche-eu-vip-1.ovpn
+
+- name: Update openvpn client config permissions
+  file:
+    dest: "/etc/openvpn/client"
+    owner: root
+    group: root
+    mode: u=rwX,g=rX,o=rX
+    recurse: yes
+  become: true
 

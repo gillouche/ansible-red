@@ -1,8 +1,20 @@
 ---
 # tasks file for jetbrains
 
-- name: Install jetbrains-toolbox
+- name: Install jetbrains-toolbox (Arch)
   yay: 
     name: jetbrains-toolbox
     state: latest
+  when: ansible_distribution == 'Archlinux'
+
+- name: Copy install script (Debian)
+  copy:
+    src: jetbrains-toolbox.sh
+    dest: /tmp/jetbrains-toolbox.sh
+    mode: 0755
+  when: ansible_facts['os_family'] == "Debian"
     
+- name: Exec install script (Debian)
+  shell: bash /tmp/jetbrains-toolbox.sh
+  become: true
+  when: ansible_facts['os_family'] == "Debian"

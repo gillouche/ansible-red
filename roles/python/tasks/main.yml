@@ -1,7 +1,14 @@
 ---
 # tasks file for python
-- name: Install python3 and other tools
+- name: Install python3 and other tools (Arch)
   yay:
     name: ["python3", "python-pip"]
     state: latest
   when: ansible_distribution == 'Archlinux'
+
+- name: Install python3 and other tools (Debian)
+  apt:
+    name: ["python3", "python-pip"]
+    state: latest
+  become: true
+  when: ansible_facts['os_family'] == "Debian"
