@@ -29,13 +29,13 @@ DIR="/opt/jetbrains-toolbox"
 echo ""
 echo  -e "Cleaning to $DIR"
 echo ""
-rm -r "$DIR"
-rm /usr/local/bin/jetbrains-toolbox
+rm -rf "$DIR"
+rm -f /usr/local/bin/jetbrains-toolbox
 
 echo ""
 echo  -e "Installing to $DIR"
 echo ""
-mkdir -p "$DIR"
+mkdir -p "$DIR" 
 tar -xzf ${DEST} -C ${DIR} --strip-components=1
 
 chmod -R u+rwX,go+rX,go-w ${DIR}
