@@ -14,10 +14,19 @@
   become: true
   when: ansible_facts['os_family'] == "Debian"
 
-- name: Install firefox config
+- name: Install firefox config (Arch)
   template:
     src: firefox-mozilla.cfg.j2
     dest: /usr/lib/firefox/defaults/pref/firefox.js
     mode: 0644
   become: true
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install firefox config (Debian)
+  template:
+    src: firefox-mozilla.cfg.j2
+    dest: /usr/lib/firefox-esr/defaults/pref/firefox.js
+    mode: 0644
+  become: true
+  when: ansible_facts['os_family'] == "Debian"
 ...
