@@ -13,6 +13,7 @@
     owner: root
     group: root
     mode: 0755
+    state: directory
   become: true
   when: ansible_facts['os_family'] == "Debian"
 
