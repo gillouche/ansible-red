@@ -19,8 +19,9 @@
 
 - name: Download and unarchive postman (Debian)
   unarchive:
-    url: https://dl.pstmn.io/download/latest/linux64
+    src: https://dl.pstmn.io/download/latest/linux64
     dest: /tmp/
+    remote_src: yes
     mode: 0755
   when: ansible_facts['os_family'] == "Debian"
 
