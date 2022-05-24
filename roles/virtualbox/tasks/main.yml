@@ -12,7 +12,7 @@
     name: ["virtualbox"]
     state: latest
   become: true
-  when: ansible_virtualization_role == 'host' and (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
+  when: ansible_virtualization_role == 'host' and (ansible_facts['os_family'] == "Debian")
 
 - name: Install virtualbox (Arch guest)
   yay: 
@@ -25,7 +25,7 @@
     name: ["virtualbox-guest-utils"]
     state: latest
   become: true
-  when: ansible_virtualization_role == 'guest' and (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
+  when: ansible_virtualization_role == 'guest' and (ansible_facts['os_family'] == "Debian")
 
 - name: Enable systemd vbox guest service
   systemd:
