@@ -21,7 +21,7 @@ DEST=/tmp/$FILE
 echo ""
 echo -e "Downloading Toolbox files"
 echo ""
-wget -cO  ${è} ${URL} --read-timeout=5 --tries=0
+wget -cO  ${DEST} ${URL} --read-timeout=5 --tries=0
 echo ""
 echo -e "Download complete!"
 
