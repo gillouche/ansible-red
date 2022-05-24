@@ -11,6 +11,7 @@
   apt:
     state: latest
     name: ['firefox', "tor-browser"]
+  become: true
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Install firefox config
@@ -18,4 +19,5 @@
     src: firefox-mozilla.cfg.j2
     dest: /usr/lib/firefox/defaults/pref/firefox.js
     mode: 0644
+  become: true
 ...

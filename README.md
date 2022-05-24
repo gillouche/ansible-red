@@ -7,7 +7,7 @@ This playbook only supports BlackArch Linux for the moment.
 
 ## Requirements
 
-* python3
+* python3 and pip, possibly python3-venv
 * OS stuff: Xorg, DE, GPU drivers, ...
 
 ## Vault

@@ -5,47 +5,55 @@
   group:
     name: "{{ target_user }}"
     state: present
+  become: true
 
 - name: Update main group user
   user:
     name: "{{ target_user }}"
     group: "{{ target_user }}"
     append: yes
+  become: true
 
 - name: Update groups of user
   user:
     name: "{{ target_user }}"
     groups: "wheel"
     append: yes
+  become: true
 
 - name: Change home group directory to new group
   file:
     path: "/home/{{ target_user }}"
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
+  become: true
 
 - name: Update repo and upgrade (Arch)
   pacman: 
     update_cache: yes
     upgrade: yes
+  become: true
   when: ansible_distribution == 'Archlinux'
 
 - name: Update repo and upgrade (Debian)
   apt: 
     update_cache: yes
     upgrade: yes
+  become: true
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Install common packages (Arch)
   pacman:
     state: latest
     name: ['curl', 'wget', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
+  become: true
   when: ansible_distribution == 'Archlinux'
 
 - name: Install common packages (Debian)
   apt:
     state: latest
     name: ['curl', 'wget', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
+  become: true
   when: ansible_facts['os_family'] == "Debian"
 
 - name: "Define role executed var {{ role_name }}_was_executed"

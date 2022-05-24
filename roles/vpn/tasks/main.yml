@@ -11,6 +11,7 @@
   apt: 
     name: ["openvpn"]
     state: latest
+  become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Copy ovpn configs
@@ -19,8 +20,18 @@
     dest: "/etc/openvpn/client/{{ item }}"
     owner: root
     group: root
-    mode: 0600
+    mode: 0644
+  become: true
   with_items:
     - htb-gillouche-eu-free-3.ovpn
     - thm-gillouche-eu-vip-1.ovpn
+
+- name: Update openvpn client config permissions
+  file:
+    dest: "/etc/openvpn/client"
+    owner: root
+    group: root
+    mode: u=rwX,g=rX,o=rX
+    recurse: yes
+  become: true
 

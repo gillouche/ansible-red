@@ -11,6 +11,7 @@
   apt: 
     name: ["virtualbox"]
     state: latest
+  become: true
   when: ansible_virtualization_role == 'host' and (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 - name: Install virtualbox (Arch guest)
@@ -23,6 +24,7 @@
   apt: 
     name: ["virtualbox-guest-utils"]
     state: latest
+  become: true
   when: ansible_virtualization_role == 'guest' and (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 - name: Enable systemd vbox guest service
@@ -30,4 +32,5 @@
     name: vboxservice
     enabled: yes
     state: restarted
+  become: true
   when: ansible_virtualization_role == 'guest'
