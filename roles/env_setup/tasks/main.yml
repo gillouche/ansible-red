@@ -20,6 +20,7 @@
     groups: "wheel"
     append: yes
   become: true
+  when: ansible_distribution == 'Archlinux'
 
 - name: Change home group directory to new group
   file:
