@@ -23,15 +23,17 @@
     mode: 0644
   become: true
   with_items:
-    - htb-gillouche-eu-free-3.ovpn
-    - thm-gillouche-eu-vip-1.ovpn
+    - htb.ovpn
+    - thm.ovpn
 
 - name: Update openvpn client config permissions
   file:
-    dest: "/etc/openvpn/client"
-    owner: root
-    group: root
+    dest: "/etc/openvpn"
     mode: u=rwX,g=rX,o=rX
     recurse: yes
   become: true
 
+- name: Enable networkmanager 
+  systemd:
+    name: NetworkManager
+    state: started
