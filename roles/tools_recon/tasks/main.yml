@@ -1,0 +1,19 @@
+---
+# tasks file for tools_recon
+
+- name: Install recon tool (Arch)
+  yay:
+    name: "{{ item }}"
+    state: latest 
+  with_items:
+    - blackarch/enum4linux
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install recon tools (Debian)
+  apt:
+    name: "{{ item }}"
+    state: latest 
+  become: true
+  with_items:
+    - enum4linux
+  when: ansible_facts['os_family'] == "Debian"
