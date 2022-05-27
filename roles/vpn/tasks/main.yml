@@ -39,6 +39,12 @@
     state: started
     enabled: yes
 
+- name: Remove openvpn config if exists
+  shell: "nmcli connection delete {{ item }}"
+  with_items:
+    - htb
+    - thm
+
 - name: Import openvpn configs 
   shell: "nmcli connection import type openvpn file /etc/openvpn/client/{{ item }}"
   with_items:
