@@ -37,3 +37,10 @@
   systemd:
     name: NetworkManager
     state: started
+    enabled: yes
+
+- name: Import openvpn configs 
+  shell: "nmcli connection import type openvpn file /etc/openvpn/client/{{ item }}"
+  with_items:
+    - htb.ovpn
+    - thm.ovpn
