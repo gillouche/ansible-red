@@ -1,0 +1,21 @@
+---
+# tasks file for tools_forensics
+
+- name: Install forensics tool (Arch)
+  yay:
+    name: "{{ item }}"
+    state: latest 
+  with_items:
+    - poppler
+    - perl-image-exiftool
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install forensics tools (Debian)
+  apt:
+    name: "{{ item }}"
+    state: latest 
+  become: true
+  with_items:
+    - poppler-utils
+    - libimage-exiftool-perl
+  when: ansible_facts['os_family'] == "Debian"
