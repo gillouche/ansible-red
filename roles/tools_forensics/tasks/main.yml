@@ -7,6 +7,7 @@
     state: latest 
   with_items:
     - poppler
+    - perl-image-exiftool
   when: ansible_distribution == 'Archlinux'
 
 - name: Install forensics tools (Debian)
@@ -16,4 +17,5 @@
   become: true
   with_items:
     - poppler-utils
+    - libimage-exiftool-perl
   when: ansible_facts['os_family'] == "Debian"
