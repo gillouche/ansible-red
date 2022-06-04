@@ -24,7 +24,6 @@
   with_items:
     - hydra
     - john
-    - wordlistctl 
     - seclists
     - mimikatz
     - hashcat
