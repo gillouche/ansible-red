@@ -39,7 +39,7 @@
   when: not rvm_stat.stat.exists
 
 - name: Install rvm 
-  shell: bash < ./tmp/rvm.sh
+  shell: bash < /tmp/rvm.sh
   when: not rvm_stat.stat.exists
 
 - name: Enable & start postgrseql 
@@ -47,3 +47,4 @@
     name: postgresql
     state: started
     enabled: yes 
+  become: true
