@@ -20,7 +20,6 @@
   become: true
   with_items:
     - enum4linux
-    - linenum
     - linux-exploit-suggester
     - exploitdb
   when: ansible_facts['os_family'] == "Debian"
