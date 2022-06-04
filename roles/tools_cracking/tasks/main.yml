@@ -1,0 +1,33 @@
+---
+# tasks file for tools_cracking
+
+- name: Install cracking tool (Arch)
+  yay:
+    name: "{{ item }}"
+    state: latest 
+  with_items:
+    - blackarch/hydra
+    - blackarch/johnny
+    - blackarch/wordlistctl
+    - blackarch/seclists
+    - blackarch/mimikatz
+    - blackarch/hashcat
+    - blackarch/hash-identifier
+    - extra/expect
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install cracking tools (Debian)
+  apt:
+    name: "{{ item }}"
+    state: latest 
+  become: true
+  with_items:
+    - hydra
+    - john
+    - wordlistctl 
+    - seclists
+    - mimikatz
+    - hashcat
+    - hash-identifier
+    - mkpasswd
+  when: ansible_facts['os_family'] == "Debian"
