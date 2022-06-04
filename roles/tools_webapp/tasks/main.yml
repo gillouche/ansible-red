@@ -20,5 +20,7 @@
     - burpsuite
     - zaproxy
     - gobuster
+    - dirbuster
+    - wordlists 
   when: ansible_facts['os_family'] == "Debian"
 

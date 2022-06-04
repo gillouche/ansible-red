@@ -16,4 +16,7 @@
     - vscodium
     - tools_webapp
     - tools_forensics
+    - tools_recon
+    - tools_cracking
+    - tools_automation
 ...

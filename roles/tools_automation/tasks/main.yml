@@ -1,0 +1,50 @@
+---
+# tasks file for tools_automation
+
+- name: Install automation tool (Arch)
+  yay:
+    name: "{{ item }}"
+    state: latest 
+  with_items:
+    - blackarch/msf-mpc
+    - blackarch/metasploit
+    - postgresql
+    - ruby
+    - blackarch/webshells
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install automation tools (Debian)
+  apt:
+    name: "{{ item }}"
+    state: latest 
+  become: true
+  with_items:
+    - metasploit-framework
+    - postgresql
+    - postgresql-client
+    - ruby
+    - webshells
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Check if rvm is installed
+  stat: 
+    path: "/home/{{ target_user }}/.rvm/scripts/rvm"
+  register: rvm_stat
+
+- name: Download rvm
+  get_url:
+    url: https://get.rvm.io
+    dest: /tmp/rvm.sh
+    mode: 0755
+  when: not rvm_stat.stat.exists
+
+- name: Install rvm 
+  shell: bash < /tmp/rvm.sh
+  when: not rvm_stat.stat.exists
+
+- name: Enable & start postgrseql 
+  systemd:
+    name: postgresql
+    state: started
+    enabled: yes 
+  become: true

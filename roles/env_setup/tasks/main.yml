@@ -46,14 +46,14 @@
 - name: Install common packages (Arch)
   pacman:
     state: latest
-    name: ['curl', 'inetutils', 'nmap', 'wget', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
+    name: ['bpytop', 'man-db', 'socat', 'rlwrap', 'curl', 'unrar', 'unzip', 'nfs-utils', 'gnu-netcat', 'tcpdump', 'inetutils', 'nmap', 'wget', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
   become: true
   when: ansible_distribution == 'Archlinux'
 
 - name: Install common packages (Debian)
   apt:
     state: latest
-    name: ['curl', 'ftp', 'nmap', 'wget', 'lsof', 'jq', 'dos2unix', 'silversearcher-ag', 'ranger', 'ncdu']
+    name: ['htop', 'net-tools', 'socat', 'rlwrap', 'curl', 'unrar', 'unzip', 'nfs-common', 'netcat-traditional', 'tcpdump', 'ftp', 'nmap', 'wget', 'lsof', 'jq', 'dos2unix', 'silversearcher-ag', 'ranger', 'ncdu']
   become: true
   when: ansible_facts['os_family'] == "Debian"
 
