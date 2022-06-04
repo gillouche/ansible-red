@@ -28,5 +28,5 @@
     - mimikatz
     - hashcat
     - hash-identifier
-    - mkpasswd
+    - whois
   when: ansible_facts['os_family'] == "Debian"
