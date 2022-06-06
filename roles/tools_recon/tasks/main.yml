@@ -62,14 +62,6 @@
   become: true
   when: not nessuscli_installed
 
-- name: Register nessus
-  shell: /opt/nessus/sbin/nessuscli fetch --register {{ nessus_key }}
-  become: true
-
-- name: Update nessus plugins
-  shell: /opt/nessus/sbin/nessuscli update --plugins-only
-  become: true
-
 - name: Enable systemd nessus 
   systemd:
     name: nessusd
