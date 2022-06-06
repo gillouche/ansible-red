@@ -29,4 +29,5 @@
     - hashcat
     - hash-identifier
     - whois
+    - wordlists
   when: ansible_facts['os_family'] == "Debian"

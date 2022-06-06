@@ -11,7 +11,15 @@
     - blackarch/linux-exploit-suggester
     - blackarch/linux-exploit-suggester.sh
     - blackarch/sploitctl
+    - blackarch/peass
   when: ansible_distribution == 'Archlinux'
+
+- name: Install nessus (Arch)
+  yay:
+    name: "nessus"
+    state: latest 
+  when: ansible_distribution == 'Archlinux'
+  register: nessus_changed
 
 - name: Install recon tools (Debian)
   apt:
@@ -23,3 +31,26 @@
     - linux-exploit-suggester
     - exploitdb
   when: ansible_facts['os_family'] == "Debian"
+
+- name: Stop nessus systemd 
+  systemd:
+    name: nessusd 
+    state: stopped
+  when: nessus_changed.changed
+
+- name: Register nessus
+  shell: /opt/nessus/sbin/nessuscli fetch --register {{ nessus_key }}
+  become: true
+  when: nessus_changed.changed
+
+- name: Update nessus plugins
+  shell: /opt/nessus/sbin/nessuscli update --plugins-only
+  become: true
+  when: nessus_changed.changed
+
+- name: Enable systemd nessus 
+  systemd:
+    name: nessusd
+    state: started
+    enabled: true
+  become: true
