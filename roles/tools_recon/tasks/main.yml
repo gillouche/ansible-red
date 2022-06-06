@@ -44,6 +44,11 @@
     nessuscli_installed: false
   when: ansible_facts['os_family'] == "Debian" and not nesusscli_exists.stat.exists
 
+- name: Set fact that nessuscli is installed (Debian)
+  set_fact:
+    nessuscli_installed: true
+  when: ansible_facts['os_family'] == "Debian" and nesusscli_exists.stat.exists
+
 - name: Download nessus (Debian)
   get_url:
     url: "{{ nessus_kali_url }}"
