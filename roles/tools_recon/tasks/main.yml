@@ -54,6 +54,7 @@
   apt:
     deb: /tmp/nessus.deb
   register: nessus_changed
+  become: true
   when: not nessuscli_installed
 
 - name: Stop nessus systemd 
