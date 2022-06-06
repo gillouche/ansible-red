@@ -10,7 +10,6 @@
     - blackarch/bloodhound
     - blackarch/neo4j-community
     - blackarch/kerbrute
-    - 
   when: ansible_distribution == 'Archlinux'
 
 - name: Install recon tools (Debian)
