@@ -21,5 +21,10 @@
     - python3-impacket
     - bloodhound
     - neo4j
-    - kerbrute
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install recon tools via Pip (Debian)
+  pip:
+    name: kerbrute
+  become: true
   when: ansible_facts['os_family'] == "Debian"
