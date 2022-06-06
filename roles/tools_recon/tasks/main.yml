@@ -57,25 +57,17 @@
   become: true
   when: not nessuscli_installed
 
-- name: Stop nessus systemd 
-  systemd:
-    name: nessusd 
-    state: stopped
-  when: nessus_changed.changed
-
 - name: Register nessus
   shell: /opt/nessus/sbin/nessuscli fetch --register {{ nessus_key }}
   become: true
-  when: nessus_changed.changed
 
 - name: Update nessus plugins
   shell: /opt/nessus/sbin/nessuscli update --plugins-only
   become: true
-  when: nessus_changed.changed
 
 - name: Enable systemd nessus 
   systemd:
     name: nessusd
-    state: started
+    state: restarted
     enabled: true
   become: true
