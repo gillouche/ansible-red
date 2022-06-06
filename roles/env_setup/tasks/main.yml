@@ -46,7 +46,7 @@
 - name: Install common packages (Arch)
   pacman:
     state: latest
-    name: ['bpytop', 'man-db', 'socat', 'rlwrap', 'curl', 'unrar', 'unzip', 'nfs-utils', 'gnu-netcat', 'tcpdump', 'inetutils', 'nmap', 'wget', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
+    name: ['bpytop', 'mlocate', 'man-db', 'socat', 'rlwrap', 'curl', 'unrar', 'unzip', 'nfs-utils', 'gnu-netcat', 'tcpdump', 'inetutils', 'nmap', 'wget', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
   become: true
   when: ansible_distribution == 'Archlinux'
 

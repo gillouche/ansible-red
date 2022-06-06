@@ -11,7 +11,15 @@
     - blackarch/linux-exploit-suggester
     - blackarch/linux-exploit-suggester.sh
     - blackarch/sploitctl
+    - blackarch/peass
   when: ansible_distribution == 'Archlinux'
+
+- name: Install nessus (Arch)
+  yay:
+    name: "nessus"
+    state: latest 
+  when: ansible_distribution == 'Archlinux'
+  register: nessus_changed
 
 - name: Install recon tools (Debian)
   apt:
@@ -23,3 +31,40 @@
     - linux-exploit-suggester
     - exploitdb
   when: ansible_facts['os_family'] == "Debian"
+
+- name: Check if nessuscli is installed (Debian)
+  stat:
+    path: /opt/nessus/sbin/nessuscli
+  register: nesusscli_exists
+  ignore_errors: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Set fact that nessuscli is not installed (Debian)
+  set_fact:
+    nessuscli_installed: false
+  when: ansible_facts['os_family'] == "Debian" and not nesusscli_exists.stat.exists
+
+- name: Set fact that nessuscli is installed (Debian)
+  set_fact:
+    nessuscli_installed: true
+  when: ansible_facts['os_family'] == "Debian" and nesusscli_exists.stat.exists
+
+- name: Download nessus (Debian)
+  get_url:
+    url: "{{ nessus_kali_url }}"
+    dest: /tmp/nessus.deb
+  when: not nessuscli_installed
+
+- name: Install nessus (Debian)
+  apt:
+    deb: /tmp/nessus.deb
+  register: nessus_changed
+  become: true
+  when: not nessuscli_installed
+
+- name: Enable systemd nessus 
+  systemd:
+    name: nessusd
+    state: restarted
+    enabled: true
+  become: true

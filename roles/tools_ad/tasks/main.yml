@@ -1,0 +1,30 @@
+---
+# tasks file for tools_ad
+
+- name: Install Active Directory tools (Arch)
+  yay:
+    name: "{{ item }}"
+    state: latest 
+  with_items:
+    - blackarch/impacket
+    - blackarch/bloodhound
+    - blackarch/neo4j-community
+    - blackarch/kerbrute
+  when: ansible_distribution == 'Archlinux'
+
+- name: Install recon tools (Debian)
+  apt:
+    name: "{{ item }}"
+    state: latest 
+  become: true
+  with_items:
+    - python3-impacket
+    - bloodhound
+    - neo4j
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install recon tools via Pip (Debian)
+  pip:
+    name: kerbrute
+  become: true
+  when: ansible_facts['os_family'] == "Debian"
