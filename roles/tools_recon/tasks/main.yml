@@ -32,6 +32,30 @@
     - exploitdb
   when: ansible_facts['os_family'] == "Debian"
 
+- name: Check if nessuscli is installed (Debian)
+  shell:
+    cmd: nessuscli
+  register: result
+  ignore_errors: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Set fact that nessuscli is not installed (Debian)
+  set_fact:
+    nessuscli_installed: false
+  when: ansible_facts['os_family'] == "Debian" and "'command not found' in result.stderr"
+
+- name: Download nessus (Debian)
+  get_url:
+    url: "{{ nessus_kali_url }}"
+    dest: /tmp/nessus.deb
+  when: not nessuscli_installed
+
+- name: Install nessus (Debian)
+  apt:
+    deb: /tmp/nessus.deb
+  register: nessus_changed
+  when: not nessuscli_installed
+
 - name: Stop nessus systemd 
   systemd:
     name: nessusd 
