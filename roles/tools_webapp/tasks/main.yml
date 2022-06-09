@@ -11,7 +11,7 @@
     - blackarch/zaproxy
     - blackarch/gobuster
     - blackarch/wpscan
-
+    - blackarch/feroxbuster
 - name: Install tools (Debian)
   apt:
     name: "{{ item }}"
@@ -23,5 +23,6 @@
     - gobuster
     - dirbuster 
     - wpscan
+    - feroxbuster
   when: ansible_facts['os_family'] == "Debian"
 

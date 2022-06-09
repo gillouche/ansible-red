@@ -4,7 +4,7 @@
 - name: Install browser packages (Arch)
   yay:
     state: latest
-    name: ['firefox', "tor-browser"]
+    name: ['firefox', 'arkenfox-user.js', 'blackarch/tor-browser-en']
   when: ansible_distribution == 'Archlinux'
 
 - name: Install browser packages (Debian)
@@ -14,12 +14,8 @@
   become: true
   when: ansible_facts['os_family'] == "Debian"
 
-- name: Install firefox config (Arch)
-  template:
-    src: firefox-mozilla.cfg.j2
-    dest: /usr/lib/firefox/defaults/pref/firefox.js
-    mode: 0644
-  become: true
+- name: Execute arkenfox-updater
+  shell: yes | arkenfox-updater
   when: ansible_distribution == 'Archlinux'
 
 - name: Install firefox config (Debian)
