@@ -12,6 +12,16 @@
     - blackarch/linux-exploit-suggester.sh
     - blackarch/sploitctl
     - blackarch/peass
+    - socat
+    - curl
+    - gnu-netcat
+    - tcpdump
+    - inetutils
+    - nmap 
+    - wget
+    - whois
+    - blackarch/bind
+    - traceroute
   when: ansible_distribution == 'Archlinux'
 
 - name: Install nessus (Arch)
@@ -30,6 +40,16 @@
     - enum4linux
     - linux-exploit-suggester
     - exploitdb
+    - net-tools
+    - socat 
+    - curl
+    - netcat-traditional
+    - tcpdump 
+    - nmap
+    - wget 
+    - whois
+    - bind9
+    - traceroute
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Check if nessuscli is installed (Debian)

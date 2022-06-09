@@ -23,8 +23,8 @@
     mode: 0644
   become: true
   with_items:
-    - htb.ovpn
-    - thm.ovpn
+    - hackthebox.ovpn
+    - tryhackme.ovpn
 
 - name: Update openvpn client config permissions
   file:
@@ -42,12 +42,14 @@
 - name: Remove openvpn config if exists
   shell: "nmcli connection delete {{ item }}"
   with_items:
+    - hackthebox
     - htb
+    - tryhackme
     - thm
   ignore_errors: true
 
 - name: Import openvpn configs 
   shell: "nmcli connection import type openvpn file /etc/openvpn/client/{{ item }}"
   with_items:
-    - htb.ovpn
-    - thm.ovpn
+    - hackthebox.ovpn
+    - tryhackme.ovpn
