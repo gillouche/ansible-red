@@ -1,0 +1,16 @@
+---
+# tasks file for tools_github
+- name: Clone repositories
+  git:
+    repo: "{{ item.value }}"
+    dest: "/opt/{{ item.key }}"
+    clone: true
+    update: true
+    force: true
+  with_items:
+    - nishang: https://github.com/samratashok/nishang.git
+    - linenum: https://github.com/rebootuser/LinEnum.git
+    - linux-exploit-suggester: https://github.com/mzet-/linux-exploit-suggester.git
+    - linux-smart-enumeration: https://github.com/diego-treitos/linux-smart-enumeration.git
+    - linuxprivchecker: https://github.com/linted/linuxprivchecker.git
+    

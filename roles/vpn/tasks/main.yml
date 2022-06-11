@@ -43,9 +43,7 @@
   shell: "nmcli connection delete {{ item }}"
   with_items:
     - hackthebox
-    - htb
     - tryhackme
-    - thm
   ignore_errors: true
 
 - name: Import openvpn configs 
