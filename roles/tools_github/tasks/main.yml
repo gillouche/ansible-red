@@ -11,6 +11,7 @@
     - nishang: https://github.com/samratashok/nishang.git
     - linenum: https://github.com/rebootuser/LinEnum.git
     - linux-exploit-suggester: https://github.com/mzet-/linux-exploit-suggester.git
+    - linux-exploit-suggester-2: https://github.com/jondonas/linux-exploit-suggester-2.git
     - linux-smart-enumeration: https://github.com/diego-treitos/linux-smart-enumeration.git
     - linuxprivchecker: https://github.com/linted/linuxprivchecker.git
-    
+
