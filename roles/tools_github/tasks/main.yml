@@ -6,6 +6,7 @@
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
     mode: 0755
+  become: true
 
 - name: Clone repositories
   git:
