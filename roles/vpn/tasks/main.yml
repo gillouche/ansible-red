@@ -53,7 +53,7 @@
     - tryhackme.ovpn
 
 - name: Setup vpn config 
-  shell: "{{ command }}"
+  shell: "{{ item }}"
   with_items:
     - nmcli connection modify tryhackme ipv4.never-default true
     - nmcli connection modify tryhackme ipv6.never-default true
