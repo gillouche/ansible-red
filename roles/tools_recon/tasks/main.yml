@@ -20,6 +20,7 @@
     - blackarch/bind
     - traceroute
     - blackarch/onesixtyone
+    - blackarch/windows-exploit-suggester
   when: ansible_distribution == 'Archlinux'
 
 - name: Install nessus (Arch)
@@ -48,6 +49,7 @@
     - bind9
     - traceroute
     - onesixtyone
+    - windows-exploit-suggester
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Check if nessuscli is installed (Debian)

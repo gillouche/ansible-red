@@ -22,4 +22,5 @@
     - { name: linux-exploit-suggester-2, repo: https://github.com/jondonas/linux-exploit-suggester-2.git }
     - { name: linux-smart-enumeration, repo: https://github.com/diego-treitos/linux-smart-enumeration.git }
     - { name: linuxprivchecker, repo: https://github.com/linted/linuxprivchecker.git }
+    - { name: windows-exploit-suggester-ng, repo: https://github.com/bitsadmin/wesng.git }
 
