@@ -51,3 +51,11 @@
   with_items:
     - hackthebox.ovpn
     - tryhackme.ovpn
+
+- name: Setup vpn config 
+  nmcli:
+    conn_name: "{{ item }}"
+    ip4-auto-default-route: false
+  with_items:
+    - hackthebox
+    - tryhackme
