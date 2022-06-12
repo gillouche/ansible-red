@@ -53,10 +53,9 @@
     - tryhackme.ovpn
 
 - name: Setup vpn config 
-  nmcli:
-    conn_name: "{{ item }}"
-    ip4-auto-default-route: false
-    state: present
+  shell: "{{ command }}"
   with_items:
-    - hackthebox
-    - tryhackme
+    - nmcli connection modify tryhackme ipv4.never-default true
+    - nmcli connection modify tryhackme ipv6.never-default true
+    - nmcli connection modify hackthebox ipv4.never-default true
+    - nmcli connection modify hackthebox ipv6.never-default true
