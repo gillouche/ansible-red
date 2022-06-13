@@ -10,6 +10,7 @@
     - vpn
     - docker
     - python
+    - gcc
     - browsers
     - jetbrains
     - postman
