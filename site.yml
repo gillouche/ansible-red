@@ -10,6 +10,7 @@
     - vpn
     - docker
     - python
+    - gcc
     - browsers
     - jetbrains
     - postman
@@ -20,4 +21,5 @@
     - tools_cracking
     - tools_automation
     - tools_ad
+    - tools_github
 ...

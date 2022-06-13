@@ -12,6 +12,9 @@
     - blackarch/gobuster
     - blackarch/wpscan
     - blackarch/feroxbuster
+    - blackarch/ffuf
+    - blackarch/ffuf-scripts
+    - blackarch/whatweb
 - name: Install tools (Debian)
   apt:
     name: "{{ item }}"
@@ -24,5 +27,7 @@
     - dirbuster 
     - wpscan
     - feroxbuster
+    - ffuf
+    - whatweb
   when: ansible_facts['os_family'] == "Debian"
 

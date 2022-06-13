@@ -43,9 +43,7 @@
   shell: "nmcli connection delete {{ item }}"
   with_items:
     - hackthebox
-    - htb
     - tryhackme
-    - thm
   ignore_errors: true
 
 - name: Import openvpn configs 
@@ -53,3 +51,11 @@
   with_items:
     - hackthebox.ovpn
     - tryhackme.ovpn
+
+- name: Setup vpn config 
+  shell: "{{ item }}"
+  with_items:
+    - nmcli connection modify tryhackme ipv4.never-default true
+    - nmcli connection modify tryhackme ipv6.never-default true
+    - nmcli connection modify hackthebox ipv4.never-default true
+    - nmcli connection modify hackthebox ipv6.never-default true
