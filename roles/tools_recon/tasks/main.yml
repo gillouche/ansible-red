@@ -88,14 +88,14 @@
     enabled: true
   become: true
 
-- name: Setup openvas (Arch)
-  shell:
-    cmd: "{{ item }}"
+- name: Copy update script openvas (Arch)
+  copy:
+    src: openvas-update.sh
+    dest: /usr/local/bin/openvas-update.sh
+  owner: root
+  group: root
+  mode: 0744
   become: true
-  with_items:
-    - "/usr/bin/greenbone-feed-sync --type GVMD_DATA"
-    - "/usr/bin/greenbone-feed-sync --type SCAP"
-    - "/usr/bin/greenbone-feed-sync --type CERT"
   when: ansible_distribution == 'Archlinux'
 
 - name: Setup systemd openvas (Arch)
