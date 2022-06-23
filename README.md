@@ -3,7 +3,7 @@ Configure kali, blackarch, ... VM or bare.
 
 This is in addition to the [dotfiles](https://github.com/gillouche/dotfiles) repository.
 
-This playbook only supports BlackArch Linux for the moment.
+This playbook is only tested on BlackArch VM and Kali VM.
 
 ## Requirements
 

@@ -3,18 +3,18 @@
 
 - name: Install gcc tooling (Arch)
   yay:
-    name: ["mingw-w64-gcc", "gcc"]
+    name: ['mingw-w64-gcc', 'gcc']
     state: latest
   when: ansible_distribution == 'Archlinux'
 
 - name: Install  gcc tooling (Debian)
   apt:
-    name: ["gcc-mingw-w64-x86-64", "gcc"]
+    name: ['gcc-mingw-w64-x86-64', 'gcc']
     state: latest
   become: true
-  when: ansible_facts['os_family'] == "Debian"
+  when: ansible_facts['os_family'] == 'Debian'
 
-- name: "Define role executed var {{ role_name }}_was_executed"
+- name: 'Define role executed var {{ role_name }}_was_executed'
   set_fact:
-    "{{ role_name }}_was_executed": true
+    '{{ role_name }}_was_executed': true
     cacheable: true
