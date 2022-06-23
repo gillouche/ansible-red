@@ -3,14 +3,14 @@
 
 - name: Install docker (Arch)
   yay:
-    state: latest
+    state: present
     name: ['docker', 'docker-compose']
   notify: "Restart docker"
   when: ansible_distribution == 'Archlinux'
 
 - name: Install docker (Debian)
   apt:
-    state: latest
+    state: present
     name: ['docker', 'docker-compose']
   notify: "Restart docker"
   become: true

@@ -4,7 +4,7 @@
 - name: Install postman-bin (Arch)
   yay: 
     name: postman-bin
-    state: latest
+    state: present
   when: ansible_distribution == 'Archlinux'
 
 - name: Delete postman directory (Debian)

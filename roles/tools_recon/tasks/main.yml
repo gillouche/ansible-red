@@ -4,7 +4,7 @@
 - name: Install recon tool (Arch)
   yay:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   with_items:
     - blackarch/enum4linux
     - blackarch/sploitctl
@@ -26,14 +26,14 @@
 - name: Install nessus (Arch)
   yay:
     name: "nessus"
-    state: latest 
+    state: present 
   when: ansible_distribution == 'Archlinux'
   register: nessus_changed
 
 - name: Install recon tools (Debian)
   apt:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   become: true
   with_items:
     - enum4linux

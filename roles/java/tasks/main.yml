@@ -4,13 +4,13 @@
 - name: Install gcc tooling (Arch)
   yay:
     name: ['jdk-openjdk']
-    state: latest
+    state: present
   when: ansible_distribution == 'Archlinux'
 
 - name: Install  gcc tooling (Debian)
   apt:
     name: ['default-jdk']
-    state: latest
+    state: present
   become: true
   when: ansible_facts['os_family'] == 'Debian'
 

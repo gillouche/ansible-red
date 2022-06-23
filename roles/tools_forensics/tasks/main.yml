@@ -4,7 +4,7 @@
 - name: Install forensics tool (Arch)
   yay:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   with_items:
     - poppler
     - perl-image-exiftool
@@ -28,7 +28,7 @@
 - name: Install forensics tools (Debian)
   apt:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   become: true
   with_items:
     - poppler-utils

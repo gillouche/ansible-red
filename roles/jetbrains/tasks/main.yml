@@ -4,7 +4,7 @@
 - name: Install jetbrains-toolbox (Arch)
   yay: 
     name: jetbrains-toolbox
-    state: latest
+    state: present
   when: ansible_distribution == 'Archlinux'
 
 - name: Copy install script (Debian)

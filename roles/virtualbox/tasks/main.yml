@@ -4,26 +4,26 @@
 - name: Install virtualbox (Arch host)
   yay: 
     name: ["virtualbox", "virtualbox-host-modules-arch"]
-    state: latest
+    state: present
   when: ansible_virtualization_role == 'host' and ansible_distribution == 'Archlinux'
 
 - name: Install virtualbox (Debian host)
   apt: 
     name: ["virtualbox"]
-    state: latest
+    state: present
   become: true
   when: ansible_virtualization_role == 'host' and ansible_facts['os_family'] == "Debian"
 
 - name: Install virtualbox (Arch guest)
   yay: 
     name: ["virtualbox-guest-utils"]
-    state: latest
+    state: present
   when: ansible_virtualization_role == 'guest' and ansible_distribution == 'Archlinux'
 
 - name: Install virtualbox (Debian guest)
   apt: 
     name: ["virtualbox-guest-utils", "virtualbox-guest-x11", "linux-headers-amd64"]
-    state: latest
+    state: present
   become: true
   when: ansible_virtualization_role == 'guest' and ansible_facts['os_family'] == "Debian"
 

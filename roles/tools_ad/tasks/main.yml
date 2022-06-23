@@ -4,7 +4,7 @@
 - name: Install Active Directory tools (Arch)
   yay:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   with_items:
     - blackarch/impacket
     - blackarch/bloodhound
@@ -15,7 +15,7 @@
 - name: Install recon tools (Debian)
   apt:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   become: true
   with_items:
     - python3-impacket

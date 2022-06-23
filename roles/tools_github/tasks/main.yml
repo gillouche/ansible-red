@@ -34,7 +34,7 @@
 - name: Copy config to mitre-shield repository
   copy:
     src: "{{ item }}"
-    dest: "/opt/mitre-shield/{{ item }}"
+    dest: "/opt/{{ item }}"
     owner: "{{ target_user }}"
     group: "{{ target_user }}"
     mode: 0644

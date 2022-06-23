@@ -4,7 +4,7 @@
 - name: Install tools (Arch)
   yay:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   when: ansible_distribution == 'Archlinux'
   with_items:
     - blackarch/burpsuite
@@ -19,7 +19,7 @@
 - name: Install tools (Debian)
   apt:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   become: true
   with_items:
     - burpsuite
