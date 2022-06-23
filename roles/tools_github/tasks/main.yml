@@ -52,7 +52,7 @@
 
 - name: Update yargen 
   shell:
-    cmd: python3 yarGen.py --update
+    cmd: python3 -m venv venv && source venv/bin/activate && pip3 install -r requirements.txt && python3 yarGen.py --update
     chdir: /opt/yar-gen
 
 - name: "Define role executed var {{ role_name }}_was_executed"
