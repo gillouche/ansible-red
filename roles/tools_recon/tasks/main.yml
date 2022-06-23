@@ -98,14 +98,6 @@
   become: true
   when: ansible_distribution == 'Archlinux'
 
-- name: Setup systemd openvas (Arch)
-  systemd:
-    name: greenbone-nvt-sync
-    enabled: true
-    state: started
-  become: true
-  when: ansible_distribution == 'Archlinux'
-
 - name: Setup systemd openvas auto update (Arch)
   systemd:
     name: greenbone-nvt-sync.timer
