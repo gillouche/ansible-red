@@ -1,15 +1,15 @@
 ---
-# tasks file for gcc
+# tasks file for java
 
 - name: Install gcc tooling (Arch)
   yay:
-    name: ["mingw-w64-gcc", "gcc"]
+    name: [jdk-openjdk"]
     state: latest
   when: ansible_distribution == 'Archlinux'
 
 - name: Install  gcc tooling (Debian)
   apt:
-    name: ["gcc-mingw-w64-x86-64", "gcc"]
+    name: ["default-jdk"]
     state: latest
   become: true
   when: ansible_facts['os_family'] == "Debian"

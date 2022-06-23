@@ -59,3 +59,8 @@
     - nmcli connection modify tryhackme ipv6.never-default true
     - nmcli connection modify hackthebox ipv4.never-default true
     - nmcli connection modify hackthebox ipv6.never-default true
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true

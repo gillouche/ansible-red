@@ -16,12 +16,46 @@
     update: true
     force: true
   with_items:
-    - { name: nishang, repo: https://github.com/samratashok/nishang.git }
-    - { name: linenum, repo: https://github.com/rebootuser/LinEnum.git }
+    - { name: windows-nishang, repo: https://github.com/samratashok/nishang.git }
+    - { name: linux-linenum, repo: https://github.com/rebootuser/LinEnum.git }
     - { name: linux-exploit-suggester, repo: https://github.com/mzet-/linux-exploit-suggester.git }
     - { name: linux-exploit-suggester-2, repo: https://github.com/jondonas/linux-exploit-suggester-2.git }
     - { name: linux-smart-enumeration, repo: https://github.com/diego-treitos/linux-smart-enumeration.git }
-    - { name: linuxprivchecker, repo: https://github.com/linted/linuxprivchecker.git }
+    - { name: linux-privchecker, repo: https://github.com/linted/linuxprivchecker.git }
     - { name: windows-exploit-suggester, repo: https://github.com/AonCyberLabs/Windows-Exploit-Suggester.git }
     - { name: windows-exploit-suggester-ng, repo: https://github.com/bitsadmin/wesng.git }
+    - { name: mitre-shield, repo: https://github.com/MITRECND/mitrecnd.github.io.git }
+    - { name: fenrir, repo: https://github.com/Neo23x0/Fenrir }
+    - { name: eff-yaya, repo: https://github.com/EFForg/yaya }
+    - { name: yar-gen, repo: https://github.com/Neo23x0/yarGen.git }
+    - { name: yar-analyzer, repo: https://github.com/Neo23x0/yarAnalyzer.git }
+    - { name: windows-privesccheck, repo: https://github.com/itm4n/PrivescCheck }
+    
+- name: Copy config to mitre-shield repository
+  copy:
+    src: "{{ item }}"
+    dest: "/opt/mitre-shield/{{ item }}"
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: 0644
+  with_items:
+    - mitre-shield/_config.yml
+    - mitre-shield/Gemfile
 
+- name: Setup and install mitre-shield repository
+  shell:
+    cmd: "{{ item }}"
+    chdir: /opt/mitre-shield
+  with_items:
+    - "bundle config set --local path 'vendor/bundle'"
+    - "bundle install"
+
+- name: Update yargen 
+  shell:
+    cmd: python3 yarGen.py --update
+    chdir: /opt/yar-gen
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true

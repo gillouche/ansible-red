@@ -20,6 +20,8 @@
     - blackarch/bind
     - traceroute
     - blackarch/onesixtyone
+    - blackarch/openvas-scanner
+    - blackarch/ghidra
   when: ansible_distribution == 'Archlinux'
 
 - name: Install nessus (Arch)
@@ -48,6 +50,8 @@
     - bind9
     - traceroute
     - onesixtyone
+    - openvas
+    - ghidra
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Check if nessuscli is installed (Debian)
@@ -85,3 +89,31 @@
     state: restarted
     enabled: true
   become: true
+
+- name: Setup openvas (Arch)
+  shell:
+    cmd: "{{ item }}"
+  become: true
+  with_items:
+    - "/usr/bin/greenbone-feed-sync --type GVMD_DATA"
+    - "/usr/bin/greenbone-feed-sync --type SCAP"
+    - "/usr/bin/greenbone-feed-sync --type CERT"
+  when: ansible_distribution == 'Archlinux'
+
+- name: Setup systemd openvas (Arch)
+  systemd:
+    name: greenbone-nvt-sync
+    enabled: true
+    state: started
+  when: ansible_distribution == 'Archlinux'
+
+- name: Setup systemd openvas auto update (Arch)
+  systemd:
+    name: greenbone-nvt-sync.timer
+    enabled: true
+  when: ansible_distribution == 'Archlinux'
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true

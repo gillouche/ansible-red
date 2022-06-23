@@ -11,6 +11,7 @@
     - docker
     - python
     - gcc
+    - java
     - browsers
     - jetbrains
     - postman

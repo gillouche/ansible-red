@@ -42,3 +42,8 @@
     state: restarted
   become: true
   when: ansible_virtualization_role == 'guest' and ansible_distribution == 'Archlinux'
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true
