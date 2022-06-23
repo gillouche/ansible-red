@@ -37,13 +37,7 @@
     - wireshark-qt
     - autopsy
     - yara
-    - cuckoo
-    - python-pefile 
-    - loki-scanner
-    - osquery
-    - volatility
-    - peepdf
-    - vipermonkey
+    - python3-pefile 
     - ghidra
   when: ansible_facts['os_family'] == "Debian"
 
