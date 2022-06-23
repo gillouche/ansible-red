@@ -4,6 +4,7 @@ Configure kali, blackarch, ... VM or bare.
 This is in addition to the [dotfiles](https://github.com/gillouche/dotfiles) repository.
 
 This playbook is only tested on BlackArch VM and Kali VM.
+I mainly use BlackArch because of AUR and more tools available from the BlackArch repository, so the tools not available from Kali repo may not be installed.
 
 ## Requirements
 
