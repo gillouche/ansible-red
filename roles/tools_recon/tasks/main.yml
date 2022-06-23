@@ -103,12 +103,14 @@
     name: greenbone-nvt-sync
     enabled: true
     state: started
+  become: true
   when: ansible_distribution == 'Archlinux'
 
 - name: Setup systemd openvas auto update (Arch)
   systemd:
     name: greenbone-nvt-sync.timer
     enabled: true
+  become: true
   when: ansible_distribution == 'Archlinux'
 
 - name: "Define role executed var {{ role_name }}_was_executed"
