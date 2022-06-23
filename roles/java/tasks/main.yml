@@ -3,18 +3,18 @@
 
 - name: Install gcc tooling (Arch)
   yay:
-    name: [jdk-openjdk"]
+    name: ['jdk-openjdk']
     state: latest
   when: ansible_distribution == 'Archlinux'
 
 - name: Install  gcc tooling (Debian)
   apt:
-    name: ["default-jdk"]
+    name: ['default-jdk']
     state: latest
   become: true
-  when: ansible_facts['os_family'] == "Debian"
+  when: ansible_facts['os_family'] == 'Debian'
 
-- name: "Define role executed var {{ role_name }}_was_executed"
+- name: 'Define role executed var {{ role_name }}_was_executed'
   set_fact:
-    "{{ role_name }}_was_executed": true
+    '{{ role_name }}_was_executed': true
     cacheable: true
