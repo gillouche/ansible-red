@@ -1,5 +1,3 @@
 dependencies:
   - role: aur_helper
     when: aur_helper_was_executed is not defined
-  - role: java 
-    when: java_was_executed is not defined

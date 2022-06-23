@@ -45,14 +45,14 @@
 
 - name: Install common packages (Arch)
   pacman:
-    state: latest
+    state: present
     name: ['bpytop', 'mlocate', 'man-db', 'rlwrap', 'unrar', 'unzip', 'nfs-utils', 'lsof', 'jq', 'dos2unix', 'the_silver_searcher', 'ranger', 'ncdu']
   become: true
   when: ansible_distribution == 'Archlinux'
 
 - name: Install common packages (Debian)
   apt:
-    state: latest
+    state: present
     name: ['htop', 'mlocate', 'man-db', 'rlwrap', 'unrar', 'unzip', 'nfs-common', 'lsof', 'jq', 'dos2unix', 'silversearcher-ag', 'ranger', 'ncdu', 'ftp']
   become: true
   when: ansible_facts['os_family'] == "Debian"

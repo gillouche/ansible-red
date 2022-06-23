@@ -3,14 +3,14 @@
 
 - name: Install docker (Arch)
   yay:
-    state: latest
+    state: present
     name: ['docker', 'docker-compose']
   notify: "Restart docker"
   when: ansible_distribution == 'Archlinux'
 
 - name: Install docker (Debian)
   apt:
-    state: latest
+    state: present
     name: ['docker', 'docker-compose']
   notify: "Restart docker"
   become: true
@@ -29,4 +29,9 @@
     state: started
     enabled: yes
   become: true
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true
 ...

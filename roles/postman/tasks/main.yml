@@ -4,7 +4,7 @@
 - name: Install postman-bin (Arch)
   yay: 
     name: postman-bin
-    state: latest
+    state: present
   when: ansible_distribution == 'Archlinux'
 
 - name: Delete postman directory (Debian)
@@ -46,4 +46,9 @@
     state: link
   become: true
   when: ansible_facts['os_family'] == "Debian"
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true
 ...

@@ -4,7 +4,7 @@
 - name: Install recon tool (Arch)
   yay:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   with_items:
     - blackarch/enum4linux
     - blackarch/sploitctl
@@ -20,19 +20,20 @@
     - blackarch/bind
     - traceroute
     - blackarch/onesixtyone
+    - blackarch/openvas-scanner
   when: ansible_distribution == 'Archlinux'
 
 - name: Install nessus (Arch)
   yay:
     name: "nessus"
-    state: latest 
+    state: present 
   when: ansible_distribution == 'Archlinux'
   register: nessus_changed
 
 - name: Install recon tools (Debian)
   apt:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   become: true
   with_items:
     - enum4linux
@@ -48,6 +49,7 @@
     - bind9
     - traceroute
     - onesixtyone
+    - openvas
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Check if nessuscli is installed (Debian)
@@ -85,3 +87,25 @@
     state: restarted
     enabled: true
   become: true
+
+- name: Copy update script openvas (Arch)
+  copy:
+    src: openvas-update.sh
+    dest: /usr/local/bin/openvas-update.sh
+    owner: root
+    group: root
+    mode: 0744
+  become: true
+  when: ansible_distribution == 'Archlinux'
+
+- name: Setup systemd openvas auto update (Arch)
+  systemd:
+    name: greenbone-nvt-sync.timer
+    enabled: true
+  become: true
+  when: ansible_distribution == 'Archlinux'
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true

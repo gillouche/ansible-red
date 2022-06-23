@@ -4,7 +4,7 @@
 - name: Install jetbrains-toolbox (Arch)
   yay: 
     name: jetbrains-toolbox
-    state: latest
+    state: present
   when: ansible_distribution == 'Archlinux'
 
 - name: Copy install script (Debian)
@@ -18,3 +18,8 @@
   shell: bash /tmp/jetbrains-toolbox.sh
   become: true
   when: ansible_facts['os_family'] == "Debian"
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true

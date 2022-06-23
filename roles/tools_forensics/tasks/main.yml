@@ -4,18 +4,44 @@
 - name: Install forensics tool (Arch)
   yay:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   with_items:
     - poppler
     - perl-image-exiftool
+    - wireshark-cli
+    - wireshark-qt
+    - blackarch/autopsy
+    - blackarch/yara
+    - blackarch/cuckoo
+    - python-pefile
+    - blackarch/loki-scanner
+    - blackarch/python-rfc5424-logging-handler
+    - python-tzlocal
+    - python-netaddr
+    - osquery
+    - blackarch/volatility3
+    - blackarch/peepdf
+    - blackarch/vipermonkey
+    - blackarch/ghidra
   when: ansible_distribution == 'Archlinux'
 
 - name: Install forensics tools (Debian)
   apt:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   become: true
   with_items:
     - poppler-utils
     - libimage-exiftool-perl
+    - wireshark
+    - wireshark-qt
+    - autopsy
+    - yara
+    - python3-pefile 
+    - ghidra
   when: ansible_facts['os_family'] == "Debian"
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true

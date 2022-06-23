@@ -4,7 +4,7 @@
 - name: Install tools (Arch)
   yay:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   when: ansible_distribution == 'Archlinux'
   with_items:
     - blackarch/burpsuite
@@ -15,10 +15,11 @@
     - blackarch/ffuf
     - blackarch/ffuf-scripts
     - blackarch/whatweb
+
 - name: Install tools (Debian)
   apt:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   become: true
   with_items:
     - burpsuite
@@ -31,3 +32,7 @@
     - whatweb
   when: ansible_facts['os_family'] == "Debian"
 
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true

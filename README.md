@@ -3,12 +3,13 @@ Configure kali, blackarch, ... VM or bare.
 
 This is in addition to the [dotfiles](https://github.com/gillouche/dotfiles) repository.
 
-This playbook only supports BlackArch Linux for the moment.
+This playbook is only tested on BlackArch VM and Kali VM.
+I mainly use BlackArch because of AUR and more tools available from the BlackArch repository, so the tools not available from Kali repo may not be installed.
 
 ## Requirements
 
-* python3 and pip, possibly python3-venv
-* OS stuff: Xorg, DE, GPU drivers, ...
+* python3 and pip
+* OS installed with main stuff: Xorg, Desktop Environment, GPU drivers, ...
 
 ## Vault
 Some config files are encrypted

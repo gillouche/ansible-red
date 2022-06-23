@@ -4,7 +4,7 @@
 - name: Install Active Directory tools (Arch)
   yay:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   with_items:
     - blackarch/impacket
     - blackarch/bloodhound
@@ -15,7 +15,7 @@
 - name: Install recon tools (Debian)
   apt:
     name: "{{ item }}"
-    state: latest 
+    state: present 
   become: true
   with_items:
     - python3-impacket
@@ -28,3 +28,8 @@
     name: kerbrute
   become: true
   when: ansible_facts['os_family'] == "Debian"
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true

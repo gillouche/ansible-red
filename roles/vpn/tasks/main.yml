@@ -4,13 +4,13 @@
 - name: Install openvpn (Arch)
   yay: 
     name: ["openvpn", "networkmanager-openvpn"]
-    state: latest
+    state: present
   when: ansible_distribution == 'Archlinux'
 
 - name: Install openvpn (Debian)
   apt: 
     name: ["openvpn", "network-manager-openvpn"]
-    state: latest
+    state: present
   become: true
   when: ansible_facts['os_family'] == "Debian"
 
@@ -59,3 +59,8 @@
     - nmcli connection modify tryhackme ipv6.never-default true
     - nmcli connection modify hackthebox ipv4.never-default true
     - nmcli connection modify hackthebox ipv6.never-default true
+
+- name: "Define role executed var {{ role_name }}_was_executed"
+  set_fact:
+    "{{ role_name }}_was_executed": true
+    cacheable: true
