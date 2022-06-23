@@ -8,7 +8,6 @@
   with_items:
     - poppler
     - perl-image-exiftool
-    - tshark 
     - wireshark-cli
     - wireshark-qt
     - blackarch/autopsy
@@ -33,7 +32,6 @@
   with_items:
     - poppler-utils
     - libimage-exiftool-perl
-    - tshark
     - wireshark
     - wireshark-qt
     - autopsy
