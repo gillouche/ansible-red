@@ -15,6 +15,7 @@
     - blackarch/ffuf
     - blackarch/ffuf-scripts
     - blackarch/whatweb
+
 - name: Install tools (Debian)
   apt:
     name: "{{ item }}"

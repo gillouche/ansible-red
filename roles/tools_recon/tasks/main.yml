@@ -21,7 +21,6 @@
     - traceroute
     - blackarch/onesixtyone
     - blackarch/openvas-scanner
-    - blackarch/ghidra
   when: ansible_distribution == 'Archlinux'
 
 - name: Install nessus (Arch)
@@ -51,7 +50,6 @@
     - traceroute
     - onesixtyone
     - openvas
-    - ghidra
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Check if nessuscli is installed (Debian)

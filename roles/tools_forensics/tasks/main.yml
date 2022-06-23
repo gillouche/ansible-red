@@ -22,6 +22,7 @@
     - blackarch/volatility3
     - blackarch/peepdf
     - blackarch/vipermonkey
+    - blackarch/ghidra
   when: ansible_distribution == 'Archlinux'
 
 - name: Install forensics tools (Debian)
@@ -43,6 +44,7 @@
     - volatility
     - peepdf
     - vipermonkey
+    - ghidra
   when: ansible_facts['os_family'] == "Debian"
 
 - name: "Define role executed var {{ role_name }}_was_executed"
