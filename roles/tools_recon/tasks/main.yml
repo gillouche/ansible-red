@@ -92,9 +92,9 @@
   copy:
     src: openvas-update.sh
     dest: /usr/local/bin/openvas-update.sh
-  owner: root
-  group: root
-  mode: 0744
+    owner: root
+    group: root
+    mode: 0744
   become: true
   when: ansible_distribution == 'Archlinux'
 
